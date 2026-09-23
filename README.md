@@ -4,15 +4,15 @@ This repository hosts the NOOR landing page and seven series galleries (three wo
 
 ## Add works
 
-Upload JPG files into `images/` with these exact names:
+Upload PNG files into `images/` with these exact names:
 
-- `circuit-01.jpg`, `circuit-02.jpg`, `circuit-03.jpg`
-- `quantum-01.jpg`, `quantum-02.jpg`, `quantum-03.jpg`
-- `field-01.jpg`, `field-02.jpg`, `field-03.jpg`
-- `flow-01.jpg`, `flow-02.jpg`, `flow-03.jpg`
-- `structure-01.jpg`, `structure-02.jpg`, `structure-03.jpg`
-- `morphology-01.jpg`, `morphology-02.jpg`, `morphology-03.jpg`
-- `dimension-01.jpg`, `dimension-02.jpg`, `dimension-03.jpg`
+- `circuit-01.png`, `circuit-02.png`, `circuit-03.png`
+- `quantum-01.png`, `quantum-02.png`, `quantum-03.png`
+- `field-01.png`, `field-02.png`, `field-03.png`
+- `flow-01.png`, `flow-02.png`, `flow-03.png`
+- `structure-01.png`, `structure-02.png`, `structure-03.png`
+- `morphology-01.png`, `morphology-02.png`, `morphology-03.png`
+- `dimension-01.png`, `dimension-02.png`, `dimension-03.png`
 
 No image is saved by the in-browser preview button; committed images are required for the published site.
 
