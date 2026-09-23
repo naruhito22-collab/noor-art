@@ -455,7 +455,7 @@ footer .shell{
 .works-top{display:flex;justify-content:flex-end}.works-close{appearance:none;border:1px solid var(--line);background:transparent;color:var(--paper);padding:10px 17px;cursor:pointer;font-size:24px}.works-close span{font-size:13px;vertical-align:middle;margin-left:8px}.works-close:hover{border-color:var(--gold)}
 .works-intro{margin:10px 0 36px}.works-intro h2{font-family:"Futura PT","Futura","Avenir Next",Arial,sans-serif;font-size:clamp(48px,7vw,94px);font-weight:500;line-height:1;margin:0}.works-intro p{color:var(--gold);font-size:18px;margin:10px 0 0}
 .works-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.work-item{min-width:0}.work-image{background:#141513;aspect-ratio:1 / 1;position:relative;display:grid;place-items:center;border:1px solid var(--line);overflow:hidden}.work-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none}.work-image.has-image img{display:block}.work-placeholder{text-align:center;color:rgba(238,231,218,.38);pointer-events:none}.work-image.has-image .work-placeholder{display:none}.work-placeholder .n{font-family:"Futura PT","Futura",sans-serif;font-size:clamp(62px,9vw,140px);font-weight:400;line-height:1;letter-spacing:-.06em}.work-placeholder .p{font-size:13px;letter-spacing:.12em;margin-top:15px}.work-bottom{padding:17px 1px 0;display:flex;align-items:center;justify-content:space-between;gap:8px}.work-bottom strong{font-family:"Futura PT","Futura",Arial,sans-serif;font-size:18px;font-weight:500}.work-upload{display:inline-block;cursor:pointer;border:1px solid var(--line);padding:9px 12px;font-size:12px;color:var(--paper);flex-shrink:0}.work-upload:hover{border-color:var(--gold)}.work-upload input{display:none}.works-help{font-size:12px;line-height:1.8;color:rgba(238,231,218,.53);max-width:1100px;margin:38px 0 0}.works-help code{color:var(--gold)}body.works-open{overflow:hidden}
+.work-item{min-width:0}.work-image{background:#141513;aspect-ratio:1 / 1;position:relative;display:grid;place-items:center;border:1px solid var(--line);overflow:hidden}.work-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:0}.work-image.has-image img{opacity:1}.work-placeholder{text-align:center;color:rgba(238,231,218,.38);pointer-events:none}.work-image.has-image .work-placeholder{display:none}.work-placeholder .n{font-family:"Futura PT","Futura",sans-serif;font-size:clamp(62px,9vw,140px);font-weight:400;line-height:1;letter-spacing:-.06em}.work-placeholder .p{font-size:13px;letter-spacing:.12em;margin-top:15px}.work-bottom{padding:17px 1px 0;display:flex;align-items:center;justify-content:space-between;gap:8px}.work-bottom strong{font-family:"Futura PT","Futura",Arial,sans-serif;font-size:18px;font-weight:500}.work-upload{display:inline-block;cursor:pointer;border:1px solid var(--line);padding:9px 12px;font-size:12px;color:var(--paper);flex-shrink:0}.work-upload:hover{border-color:var(--gold)}.work-upload input{display:none}.works-help{font-size:12px;line-height:1.8;color:rgba(238,231,218,.53);max-width:1100px;margin:38px 0 0}.works-help code{color:var(--gold)}body.works-open{overflow:hidden}
 @media(max-width:850px){.works-grid{grid-template-columns:1fr}.works-dialog{width:calc(100% - 18px);margin:1vh auto;max-height:98vh;padding:18px 18px 30px}.work-image{aspect-ratio:1/1}.works-intro{margin-bottom:24px}}
 </style>
 </head>
@@ -734,10 +734,18 @@ footer .shell{
       const num=String(i).padStart(2,'0');
       const item=document.createElement('article');item.className='work-item';
       const frame=document.createElement('div');frame.className='work-image';
-      const image=document.createElement('img');image.alt=english+' 作品 '+num;image.loading='lazy';
+      const image=document.createElement('img');image.alt=english+' 作品 '+num;image.loading='eager';
       image.onload=()=>frame.classList.add('has-image');
-      image.onerror=()=>frame.classList.remove('has-image');
-      image.src='https://raw.githubusercontent.com/naruhito22-collab/noor-art/main/images/'+key+'-'+num+'.png';
+      image.onerror=()=>{
+        if(!image.dataset.fallback){
+          image.dataset.fallback='1';
+          image.src='https://raw.githubusercontent.com/naruhito22-collab/noor-art/main/images/'+key+'-'+num+'.png';
+        }else{
+          frame.classList.remove('has-image');
+          placeholder.querySelector('.p').textContent='画像を読み込めませんでした';
+        }
+      };
+      image.src=new URL('images/'+key+'-'+num+'.png',document.baseURI).href;
       frame.append(image);
       const placeholder=document.createElement('div');placeholder.className='work-placeholder';
       placeholder.innerHTML='<div class="n">'+num+'</div><div class="p">作品画像</div>';
