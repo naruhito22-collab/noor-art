@@ -698,7 +698,7 @@ footer .shell{
     <div class="works-top"><button type="button" class="works-close" id="works-close" aria-label="閉じる">× <span>閉じる</span></button></div>
     <div class="works-intro"><h2 id="works-title"></h2><p id="works-subtitle"></p></div>
     <div class="works-grid" id="works-grid"></div>
-    <p class="works-help">画像の登録：公開用には <code>images/シリーズ名-01.png</code> 〜 <code>03.png</code> のファイルを同じフォルダに配置してください。ここで画像を選ぶと、このブラウザ上で仮プレビューできます（保存・アップロードはされません）。</p>
+    <p class="works-help">画像の登録：GitHub の images フォルダに <code>images/シリーズ名-01.png</code> 〜 <code>03.png</code> のファイルを同じフォルダに配置してください。ここで画像を選ぶと、このブラウザ上で仮プレビューできます（保存・アップロードはされません）。</p>
   </section>
 </div>
 
@@ -737,7 +737,7 @@ footer .shell{
       const image=document.createElement('img');image.alt=english+' 作品 '+num;image.loading='lazy';
       image.onload=()=>frame.classList.add('has-image');
       image.onerror=()=>frame.classList.remove('has-image');
-      image.src='images/'+key+'-'+num+'.png';
+      image.src='https://raw.githubusercontent.com/naruhito22-collab/noor-art/main/images/'+key+'-'+num+'.png';
       frame.append(image);
       const placeholder=document.createElement('div');placeholder.className='work-placeholder';
       placeholder.innerHTML='<div class="n">'+num+'</div><div class="p">作品画像</div>';
