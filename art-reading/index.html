@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ART READING</title>
+<style>
+:root{--bg:#f5f5f2;--fg:#111;--muted:#717171;--line:#d8d8d2;--card:#fff;--pad:clamp(20px,5vw,42px)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Futura,"Avenir Next","Helvetica Neue",Arial,"Noto Sans JP",sans-serif}body{min-height:100dvh}
+button,input,textarea{font:inherit}button{cursor:pointer}.app{width:min(100%,720px);min-height:100dvh;margin:0 auto;padding:18px var(--pad) 42px}
+.topbar{display:flex;justify-content:space-between;align-items:center;height:44px;margin-bottom:28px}.brand{font-size:12px;font-weight:700;letter-spacing:.14em}
+.text-btn{border:0;background:transparent;color:var(--muted);font-size:12px;letter-spacing:.08em;padding:10px 0}.screen{display:none;min-height:calc(100dvh - 110px);flex-direction:column}.screen.active{display:flex}
+.hero{margin:auto 0 44px}.eyebrow,.step{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--muted);margin:0 0 18px}
+h1{font-size:clamp(34px,9vw,58px);line-height:1.12;letter-spacing:-.04em;margin:0 0 22px;font-weight:600}h2{font-size:clamp(26px,7vw,40px);line-height:1.25;letter-spacing:-.035em;margin:0 0 16px;font-weight:600}
+.lead,.sub{font-size:15px;line-height:1.75;color:var(--muted);margin:0}.note{font-size:11px;line-height:1.6;color:var(--muted);margin:14px 0 0}
+.primary,.secondary,.upload-label{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;border-radius:0;border:1px solid var(--fg);font-weight:600;letter-spacing:.02em;text-decoration:none}
+.primary{background:var(--fg);color:#fff}.secondary{background:transparent;color:var(--fg)}.primary:disabled{opacity:.28;cursor:not-allowed}
+.actions{margin-top:auto;padding-top:26px;display:flex;gap:10px}.actions.two>*{flex:1}.actions.stacked{flex-direction:column}.finish{align-self:center;margin-top:2px}
+.photo-frame,.mini-photo{background:#e8e8e3;overflow:hidden}.photo-frame{height:64dvh;max-height:680px}
+.photo-frame img,.mini-photo img,.result-card>img{width:100%;height:100%;object-fit:contain;display:block}.mini-photo{width:100%;height:22dvh;min-height:150px;max-height:220px;margin-bottom:34px}
+.title-input,textarea{width:100%;border:0;border-bottom:1px solid var(--fg);border-radius:0;background:transparent;color:var(--fg);outline:none;padding:18px 0;font-size:22px;margin-top:18px}
+textarea{min-height:120px;resize:none;font-size:18px;line-height:1.6}.progress{display:flex;align-items:center;gap:16px;font-size:11px;color:var(--muted);margin-bottom:18px}
+.progress .line{height:1px;background:var(--line);flex:1;position:relative;overflow:hidden}.progress .line i{display:block;height:100%;width:25%;background:var(--fg);transition:width .25s ease}
+.choice-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}.choice{min-height:52px;border:1px solid var(--line);background:transparent;text-align:left;padding:0 16px}.choice.selected{border-color:var(--fg);background:var(--fg);color:#fff}
+.optional{margin-top:14px}.result-card{background:var(--card);border:1px solid var(--line)}.result-card>img{height:min(48dvh,460px);background:#eee}
+.result-body{padding:28px 24px 22px}.result-body h2{font-size:30px;margin-bottom:18px}.result-body p{font-family:"Noto Serif JP","Yu Mincho",serif;white-space:pre-wrap;font-size:15px;line-height:2;margin:0 0 28px}
+.result-meta{display:flex;justify-content:space-between;padding-top:16px;border-top:1px solid var(--line);font-size:9px;letter-spacing:.14em;color:var(--muted)}
+@media (min-width:700px){.app{padding-top:26px}.mini-photo{height:200px}}
+</style>
+</head>
+<body>
+<main class="app" id="app">
+<header class="topbar"><div class="brand">ART READING</div><button class="text-btn" id="resetBtn" type="button">RESET</button></header>
+
+<section class="screen active" data-screen="start">
+<div class="hero"><p class="eyebrow">REINTERPRET CONTEMPORARY ART</p><h1>わからなくていい。<br>あなたの見方で、読み替える。</h1><p class="lead">作品を撮影して、自分だけのタイトルと解釈を残します。</p></div>
+<label class="primary upload-label">作品を撮る<input id="photoInput" type="file" accept="image/*" capture="environment" hidden></label>
+<p class="note">撮影・保存が許可されている作品で使用してください。</p>
+</section>
+
+<section class="screen" data-screen="photo">
+<div class="photo-frame"><img id="photoPreview" alt="撮影した作品"></div>
+<div class="actions two"><label class="secondary upload-label">撮り直す<input id="photoRetake" type="file" accept="image/*" capture="environment" hidden></label><button class="primary" id="photoOk" type="button">この作品で進む</button></div>
+</section>
+
+<section class="screen" data-screen="title">
+<div class="mini-photo"><img id="titlePhoto" alt="作品"></div><p class="step">TITLE</p>
+<h2>この作品に、勝手にタイトルを付けてください。</h2><p class="sub">作者のタイトルは気にしなくて構いません。</p>
+<input class="title-input" id="titleInput" maxlength="60" placeholder="例：静かな衝突" autocomplete="off">
+<button class="primary" id="titleNext" type="button" disabled>次へ</button>
+</section>
+
+<section class="screen" data-screen="question">
+<div class="progress"><span id="progressText">1 / 4</span><span class="line"><i id="progressBar"></i></span></div>
+<div class="mini-photo"><img id="questionPhoto" alt="作品"></div><p class="step" id="questionStage">INTUITION</p><h2 id="questionText">最初に目に入ったものは？</h2>
+<div id="answerArea"></div>
+<div class="actions stacked"><button class="primary" id="answerNext" type="button" disabled>次の質問へ</button><button class="text-btn finish" id="finishEarly" type="button">ここで完成する</button></div>
+</section>
+
+<section class="screen" data-screen="result">
+<p class="step">RECONSTRUCTED VIEW</p>
+<article class="result-card" id="resultCard"><img id="resultPhoto" alt="作品"><div class="result-body"><h2 id="resultTitle"></h2><p id="resultText"></p><div class="result-meta"><span>MY READING</span><span id="resultDate"></span></div></div></article>
+<div class="actions stacked"><button class="primary" id="saveBtn" type="button">画像として保存</button><button class="secondary" id="againBtn" type="button">もう一度</button></div>
+<p class="note">この試作版の解説文は仮ロジックです。API接続後、回答をAIが自然な文章に再編集します。</p>
+</section>
+</main>
+<canvas id="exportCanvas" hidden></canvas>
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+const state={photoData:'',title:'',answers:[]};
+const qs=[
+{stage:'INTUITION',text:'最初に目に入ったものは？',type:'text'},
+{stage:'FEELING',text:'好き・嫌いで言うと、どちらに近い？',type:'feeling'},
+{stage:'STORY',text:'この作品の中で、何が起きていると思う？',type:'text'},
+{stage:'YOURSELF',text:'自分の経験に置き換えると、何に近い？',type:'text'}
+];
+let qi=0;const $=id=>document.getElementById(id);
+function show(name){screens.forEach(s=>s.classList.toggle('active',s.dataset.screen===name));window.scrollTo(0,0)}
+function setAllPhotos(src){['photoPreview','titlePhoto','questionPhoto','resultPhoto'].forEach(id=>$(id).src=src)}
+function reset(){state.photoData='';state.title='';state.answers=[];qi=0;$('titleInput').value='';$('titleNext').disabled=true;show('start')}
+function handlePhoto(file){if(!file)return;const reader=new FileReader();reader.onload=e=>{state.photoData=e.target.result;setAllPhotos(state.photoData);show('photo')};reader.readAsDataURL(file)}
+$('photoInput').addEventListener('change',e=>handlePhoto(e.target.files[0]));$('photoRetake').addEventListener('change',e=>handlePhoto(e.target.files[0]));$('photoOk').onclick=()=>show('title');$('resetBtn').onclick=reset;
+$('titleInput').addEventListener('input',e=>{$('titleNext').disabled=!e.target.value.trim()});
+$('titleNext').onclick=()=>{state.title=$('titleInput').value.trim();qi=0;renderQuestion();show('question')};
+
+function renderQuestion(){
+const q=qs[qi];$('progressText').textContent=`${qi+1} / 4`;$('progressBar').style.width=`${(qi+1)*25}%`;$('questionStage').textContent=q.stage;$('questionText').textContent=q.text;$('answerNext').textContent=qi===qs.length-1?'完成する':'次の質問へ';$('answerNext').disabled=true;
+const area=$('answerArea');area.innerHTML='';
+if(q.type==='text'){const ta=document.createElement('textarea');ta.placeholder='短くても大丈夫です';ta.value=state.answers[qi]?.text||'';ta.addEventListener('input',()=>{$('answerNext').disabled=!ta.value.trim()});area.appendChild(ta);if(ta.value.trim())$('answerNext').disabled=false}
+else{const grid=document.createElement('div');grid.className='choice-grid';['好き','どちらでもない','嫌い'].forEach(v=>{const b=document.createElement('button');b.type='button';b.className='choice';b.textContent=v;if(state.answers[qi]?.choice===v)b.classList.add('selected');b.onclick=()=>{grid.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('answerNext').disabled=false};grid.appendChild(b)});const opt=document.createElement('textarea');opt.className='optional';opt.placeholder='なぜ？（任意）';opt.value=state.answers[qi]?.reason||'';area.append(grid,opt);if(state.answers[qi]?.choice)$('answerNext').disabled=false}}
+function captureAnswer(){const q=qs[qi],area=$('answerArea');if(q.type==='text')state.answers[qi]={text:area.querySelector('textarea').value.trim()};else state.answers[qi]={choice:area.querySelector('.choice.selected')?.textContent||'',reason:area.querySelector('textarea').value.trim()}}
+$('answerNext').onclick=()=>{captureAnswer();if(qi<qs.length-1){qi++;renderQuestion()}else finish()};
+$('finishEarly').onclick=()=>{if(!$('answerNext').disabled)captureAnswer();finish()};
+
+function buildText(){const a=state.answers,lines=[];if(a[0]?.text)lines.push(`最初に目に入ったのは、${a[0].text}。`);if(a[1]?.choice){let s=`好き・嫌いで言えば「${a[1].choice}」に近い。`;if(a[1].reason)s+=` ${a[1].reason}。`;lines.push(s)}if(a[2]?.text)lines.push(`私には、${a[2].text}ように見える。`);if(a[3]?.text)lines.push(`自分の経験に重ねるなら、${a[3].text}に近い。`);if(!lines.length)lines.push('この作品を見た瞬間に浮かんだものを、そのまま残した。');return lines.join('\n')}
+function finish(){$('resultTitle').textContent=state.title;$('resultText').textContent=buildText();$('resultDate').textContent=new Intl.DateTimeFormat('ja-JP',{year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());show('result')}
+$('againBtn').onclick=reset;
+$('saveBtn').onclick=async()=>{const img=new Image();img.onload=()=>{const c=$('exportCanvas'),ctx=c.getContext('2d');const W=1400,photoH=980,pad=88;c.width=W;c.height=1900;ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);const scale=Math.min(W/img.width,photoH/img.height),dw=img.width*scale,dh=img.height*scale;ctx.fillStyle='#eee';ctx.fillRect(0,0,W,photoH);ctx.drawImage(img,(W-dw)/2,(photoH-dh)/2,dw,dh);ctx.fillStyle='#111';ctx.font='600 56px Arial';wrap(ctx,state.title,pad,1095,W-pad*2,72);ctx.font='30px serif';const text=buildText().split('\n');let y=1265;text.forEach(line=>{y=wrap(ctx,line,pad,y,W-pad*2,50)+16});ctx.strokeStyle='#ddd';ctx.beginPath();ctx.moveTo(pad,1760);ctx.lineTo(W-pad,1760);ctx.stroke();ctx.fillStyle='#777';ctx.font='18px Arial';ctx.fillText('MY READING',pad,1810);ctx.textAlign='right';ctx.fillText($('resultDate').textContent,W-pad,1810);ctx.textAlign='left';const a=document.createElement('a');a.download='art-reading.png';a.href=c.toDataURL('image/png');a.click()};img.src=state.photoData};
+function wrap(ctx,text,x,y,maxWidth,lineHeight){const chars=[...text];let line='';for(const ch of chars){const test=line+ch;if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line,x,y);line=ch;y+=lineHeight}else line=test}if(line)ctx.fillText(line,x,y);return y}
+</script>
+</body></html>
