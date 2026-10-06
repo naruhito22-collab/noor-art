@@ -117,13 +117,34 @@ textarea{min-height:120px;resize:none;font-size:18px;line-height:1.7}
 
 <script>
 const screens=[...document.querySelectorAll('.screen')];
-const state={photoData:'',title:'',answers:[]};
-const qs=[
-{text:'最初に目に入ったものは？',type:'text'},
-{text:'好き・嫌いで言うと\nどちらに近い？',type:'feeling'},
-{text:'この作品の中で\n何が起きていると思う？',type:'text'},
-{text:'自分の経験に置き換えると\n何に近い？',type:'text'}
+const state={photoData:'',title:'',answers:[],questions:[]};
+const questionPools=[
+  [
+    title=>`「${title}」と付けたのは、どこを見てそう感じた？`,
+    title=>`「${title}」の中で、一番気になる部分はどこ？`,
+    title=>`最初の3秒で、何が「${title}」につながった？`,
+    title=>`この作品のどこに「${title}」を感じた？`
+  ],
+  [
+    title=>`「${title}」は、好き・嫌いで言うとどちらに近い？`,
+    title=>`「${title}」を見ていると、心地いい？ それとも落ち着かない？`,
+    title=>`この「${title}」に、近づきたい？ 離れたい？`,
+    title=>`「${title}」をもう少し見ていたい？`
+  ],
+  [
+    (title,prev)=>prev ? `さっきの「${prev}」から考えると、この「${title}」では何が起きている？` : `この「${title}」では、何が起きていると思う？`,
+    title=>`「${title}」の直前に、何があったと思う？`,
+    title=>`この「${title}」のあと、何が起きそう？`,
+    title=>`「${title}」に登場人物がいるとしたら、何をしている？`
+  ],
+  [
+    title=>`「${title}」を見て、何を思い出した？`,
+    title=>`この「${title}」から、どんな場所を思い浮かべる？`,
+    title=>`「${title}」に似た感覚を、どこかで味わったことはある？`,
+    title=>`この「${title}」から、誰か・何かを連想する？`
+  ]
 ];
+const questionTypes=['text','feeling','text','text'];
 let qi=0;
 const $=id=>document.getElementById(id);
 
@@ -135,7 +156,7 @@ function setPhotos(src){
   ['photoPreview','titlePhoto','questionPhoto','resultPhoto'].forEach(id=>$(id).src=src);
 }
 function reset(){
-  state.photoData=''; state.title=''; state.answers=[]; qi=0;
+  state.photoData=''; state.title=''; state.answers=[]; state.questions=[]; qi=0;
   $('titleInput').value=''; $('titleNext').disabled=true; show('start');
 }
 function handlePhoto(file){
@@ -153,14 +174,23 @@ $('resetBtn').onclick=reset;
 $('titleInput').addEventListener('input',e=>$('titleNext').disabled=!e.target.value.trim());
 $('titleNext').onclick=()=>{
   state.title=$('titleInput').value.trim();
-  qi=0; renderQuestion(); show('question');
+  state.questions=[]; qi=0; renderQuestion(); show('question');
 };
 
+function pickQuestion(index){
+  if(state.questions[index]) return state.questions[index];
+  const pool=questionPools[index];
+  const prev=index>0 ? (state.answers[index-1]?.text || state.answers[index-1]?.choice || '') : '';
+  const fn=pool[Math.floor(Math.random()*pool.length)];
+  const q={text:fn(state.title,prev),type:questionTypes[index]};
+  state.questions[index]=q;
+  return q;
+}
 function renderQuestion(){
-  const q=qs[qi];
+  const q=pickQuestion(qi);
   $('progressText').textContent=String(qi+1).padStart(2,'0')+' / 04';
   $('progressBar').style.width=((qi+1)*25)+'%';
-  $('questionText').innerHTML=q.text.replace('\n','<br>');
+  $('questionText').textContent=q.text;
   $('answerNext').textContent=qi===3?'完成する':'次へ →';
   $('answerNext').disabled=true;
   const area=$('answerArea'); area.innerHTML='';
@@ -190,7 +220,7 @@ function renderQuestion(){
 }
 
 function captureAnswer(){
-  const q=qs[qi],area=$('answerArea');
+  const q=pickQuestion(qi),area=$('answerArea');
   if(q.type==='text'){
     state.answers[qi]={text:area.querySelector('textarea').value.trim()};
   }else{
@@ -211,7 +241,7 @@ function buildText(){
   if(a[0]?.text)lines.push('最初に目に入ったのは、'+a[0].text+'。');
   if(a[1]?.choice)lines.push('好き・嫌いで言えば「'+a[1].choice+'」に近い。');
   if(a[2]?.text)lines.push('私には、'+a[2].text+'ように見える。');
-  if(a[3]?.text)lines.push('自分の経験に重ねるなら、'+a[3].text+'に近い。');
+  if(a[3]?.text)lines.push('そこから思い出したのは、'+a[3].text+'。');
   if(!lines.length)lines.push('この作品を見た瞬間に浮かんだものを、そのまま残した。');
   return lines.join('\n\n');
 }
