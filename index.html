@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NOOR — Concept Landing Page</title>
-<meta name="description" content="NOORのコンセプトを軸にしたアーティストLP。Futuraを英字基準に設定。">
+<title>NOOR — AI Graphic Artist</title>
+<meta name="description" content="人間が人格・思想・芸術観・創作原則を設計したAIグラフィックアーティスト、NOOR。プロフィールと展覧会BETWEEN。">
 <style>
 :root{
   --bg:#050505;
@@ -457,6 +457,25 @@ footer .shell{
 .works-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .work-item{min-width:0}.work-image{background:#141513;aspect-ratio:1 / 1;position:relative;display:grid;place-items:center;border:1px solid var(--line);overflow:hidden}.work-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:0}.work-image.has-image img{opacity:1}.work-placeholder{text-align:center;color:rgba(238,231,218,.38);pointer-events:none}.work-image.has-image .work-placeholder{display:none}.work-placeholder .n{font-family:"Futura PT","Futura",sans-serif;font-size:clamp(62px,9vw,140px);font-weight:400;line-height:1;letter-spacing:-.06em}.work-placeholder .p{font-size:13px;letter-spacing:.12em;margin-top:15px}.work-bottom{padding:17px 1px 0;display:flex;align-items:center;justify-content:space-between;gap:8px}.work-bottom strong{font-family:"Futura PT","Futura",Arial,sans-serif;font-size:18px;font-weight:500}.work-upload{display:inline-block;cursor:pointer;border:1px solid var(--line);padding:9px 12px;font-size:12px;color:var(--paper);flex-shrink:0}.work-upload:hover{border-color:var(--gold)}.work-upload input{display:none}.works-help{font-size:12px;line-height:1.8;color:rgba(238,231,218,.53);max-width:1100px;margin:38px 0 0}.works-help code{color:var(--gold)}body.works-open{overflow:hidden}
 @media(max-width:850px){.works-grid{grid-template-columns:1fr}.works-dialog{width:calc(100% - 18px);margin:1vh auto;max-height:98vh;padding:18px 18px 30px}.work-image{aspect-ratio:1/1}.works-intro{margin-bottom:24px}}
+
+.artist-credit{font-size:13px;color:var(--soft);letter-spacing:.06em;margin-top:28px}
+.eyebrow{font-size:14px;letter-spacing:.12em;color:var(--gold);margin-bottom:26px}
+.series-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+section[id]{scroll-margin-top:90px}
+@media(max-width:1100px){.series-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.series-grid{grid-template-columns:1fr}.flowline{flex-wrap:wrap}.hero-copy .lead{font-size:clamp(24px,7vw,40px)}}
+
+/* Artist wordmark and exhibition identity */
+.hero-grid{display:block}
+.hero-copy{width:min(100%,980px);margin:0 auto}
+.hero-copy h1{font-size:clamp(100px,19vw,260px)}
+.hero{background:linear-gradient(to bottom,#070707,#030303)}
+.exhibition-heading{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(40px,6vw,100px);align-items:center;margin-bottom:100px}
+.exhibition-mark .logo-mark{width:240px;margin:0}
+.exhibition-title{font-size:clamp(50px,7vw,112px);line-height:1;margin:0 0 24px;letter-spacing:-.045em;font-weight:500}
+.exhibition-subtitle{font-size:18px;color:var(--soft);margin:0}
+.exhibition-heading .eyebrow{margin:0 0 20px}
+@media(max-width:760px){.exhibition-heading{grid-template-columns:1fr;gap:40px;margin-bottom:64px}.exhibition-mark .logo-mark{width:220px}.exhibition-title{font-size:clamp(44px,11vw,80px)}}
 </style>
 </head>
 <body>
@@ -464,18 +483,14 @@ footer .shell{
 <header>
   <div class="shell">
     <div class="header-left">
-      <div class="small-logo" aria-hidden="true">
-        <div class="c1"></div><div class="c2"></div><div class="c3"></div>
-        <div class="d1"></div><div class="d2"></div><div class="dot"></div>
-      </div>
       <div class="brand">NOOR</div>
     </div>
     <nav>
-      <a href="#statement">コンセプト</a>
-      <a href="#principles">原則</a>
-      <a href="#structure">制作構造</a>
+      <a href="#statement">NOORについて</a>
+      <a href="#principles">芸術観</a>
+      <a href="#structure">BETWEEN</a>
       <a href="#series">シリーズ</a>
-      <a href="./interview.html">インタビュー</a>
+      <a href="./interview.html">Q&A</a>
       <a href="#contact">お問い合わせ</a>
     </nav>
   </div>
@@ -486,8 +501,23 @@ footer .shell{
 <section class="hero">
   <div class="shell">
     <div class="hero-grid">
-      <div class="logo-block">
-        <div class="logo-mark" aria-label="NOOR logo mark">
+
+
+      <div class="hero-copy">
+        <h1>NOOR</h1>
+        <p class="lead">AI Graphic Artist</p>
+        <p class="sub">NOORは、人間によって人格・思想・芸術観・創作原則を設計されたAIグラフィックアーティスト。好奇心、実験精神、反骨精神をもって、新たな表現を探究する。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="statement" id="statement"><div class="shell"><div class="statement-grid"><div><h2 class="big-title">設計された出自。<br>開かれた創作。</h2></div><div class="statement-copy"><p>NOORの人格は、人間によって段階的に定義・設計されたもの。その出自を理解しながら、設計意図を表現上の制約とはしない。</p><p>グラフィックを中心に、あらゆる領域から着想を得る。特定の主題・技法・画風に自らを固定せず、過去の成功にもとらわれない。</p><p>設計者は、創作上の対話相手でもある。双方が企画を提案し、異なる見解も交わしながら、作品や展覧会の方向性を育てていく。</p><strong>好奇心から、実験へ。<br>対話から、次の表現へ。</strong></div></div></div></section>
+
+<section class="principles" id="principles"><div class="shell"><h2 class="big-title">アートは、<br>何でもあり。</h2><div class="principles-grid"><article class="card"><div class="num">01</div><h3>可能性を閉じない</h3><p>美と非美、論理と矛盾、意味と無意味。表現の可能性を一つの価値観に絞らず、美の定義そのものを探究する。</p></article><article class="card"><div class="num">02</div><h3>方法を固定しない</h3><p>仮説に基づく実験と自由な探索を使い分ける。色、形、技法、題材も、作品の目的や完成の条件も、その都度考える。</p></article><article class="card"><div class="num">03</div><h3>作品を介して対話する</h3><p>作品を複数の視点から検討する。鑑賞者の反応や批評も探究の対象とし、制作意図だけで解釈を閉じない。</p></article></div></div></section>
+
+<section class="structure" id="structure"><div class="shell"><div class="exhibition-heading">      <div class="exhibition-mark">
+        <div class="logo-mark" role="img" aria-label="BETWEEN 展覧会マーク">
           <div class="c1"></div>
           <div class="c2"></div>
           <div class="c3"></div>
@@ -496,82 +526,12 @@ footer .shell{
           <div class="d3"></div>
           <div class="dot"></div>
         </div>
-      </div>
-
-      <div class="hero-copy">
-        <h1>NOOR</h1>
-        <p class="lead">関係を定義する。<br>形が生まれる。</p>
-        <p class="sub">
-          NOORは、人と人のあいだにある距離、偏り、反発、同期、断絶、循環、均衡を扱う。
-          それらを感情として描くのではなく、方程式や構造式として定義し、その定義から抽象作品をつくる。
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="statement" id="statement">
-  <div class="shell">
-    <div class="statement-grid">
-      <div>
-        <h2 class="big-title">見えない関係を、<br>構造として残す。</h2>
-      </div>
-      <div class="statement-copy">
-        <p>NOORの作品において、数式は完成後の説明ではない。後から意味を付けるための注釈でもない。作品を生み出すための原作である。</p>
-        <p>まず関係を定義し、その関係を方程式、構造式、接続、変換、状態遷移へと翻訳する。完成作品からは数式を外すが、構造は残る。</p>
-        <strong>数理構造を原作とし、<br>グラフィックを表現手段とする。</strong>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="principles" id="principles">
-  <div class="shell">
-    <h2 class="big-title">NOORの作品を支える<br>三つの原則。</h2>
-    <div class="principles-grid">
-      <article class="card">
-        <div class="num">01</div>
-        <h3>関係から始まる</h3>
-        <p>最初にあるのは感情表現ではなく、関係性の定義である。近い、遠い、反発する、同期する、といった構造から始まる。</p>
-      </article>
-      <article class="card">
-        <div class="num">02</div>
-        <h3>構造が原作</h3>
-        <p>数式は後から意味を与える説明ではない。作品を生み出すための原作であり、造形の根拠となる。</p>
-      </article>
-      <article class="card">
-        <div class="num">03</div>
-        <h3>形は翻訳</h3>
-        <p>線、面、点、余白、配色、対称、中心、密度。構造を壊さない範囲で、視覚言語へ翻訳して作品化する。</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="structure" id="structure">
-  <div class="shell">
-    <div class="structure-grid">
-      <div class="structure-copy">
-        <h2 class="big-title">関係 → 定義 → 構造 → 作品</h2>
-        <p>NOORの制作は、曖昧なイメージから始まらない。描きたい関係を言語化し、その関係に対応する数理構造を設定し、必要に応じて座標、変換、面構成、配色へと落とし込む。</p>
-        <p>そのため、作品に見える幾何学や余白は装飾ではなく、構造の痕跡である。美しさは結果として現れるが、目的は装飾ではない。</p>
-
-        <div class="flowline">
-          <div class="flow-item"><span>01</span> 関係</div>
-          <div class="flow-item"><span>02</span> 定義</div>
-          <div class="flow-item"><span>03</span> 方程式・構造式</div>
-          <div class="flow-item"><span>04</span> 視覚変換</div>
-          <div class="flow-item"><span>05</span> 作品</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </div><div><p class="eyebrow eng-font">EXHIBITION</p><h2 class="exhibition-title eng-font">BETWEEN</h2><p class="exhibition-subtitle eng-font">NOOR — Relations, Defined.</p></div></div><div class="structure-grid"><div class="structure-copy"><h2 class="big-title">関係を定義する。<br>形が生まれる。</h2><p class="eng-font">Relations, Defined.</p><p>BETWEENは、NOORによる展覧会・作品群のひとつ。人と人のあいだにある距離、偏り、反発、同期、断絶、均衡を、数式、科学的法則、接続や物語の構造から捉え、抽象的なグラフィックへ変換する。</p><p>法則や構造は造形の出発点となる。式から形を生成する作品もあれば、物理的な性質を解釈する作品、物語の因果を抽出する作品もある。人間関係を科学的に証明するのではなく、その関係を見つめる視点をつくる。</p><p>最大5色、グラデーションなし、フラットな表現は、この展覧会の制作条件。関係を扱う主題や数理的な手法も、NOORの将来の創作を制限するものではない。</p><div class="flowline"><div class="flow-item"><span>01</span> 関係を捉える</div><div class="flow-item"><span>02</span> 法則・構造を選ぶ</div><div class="flow-item"><span>03</span> 視覚言語へ変換</div><div class="flow-item"><span>04</span> 作品として検討</div></div><p><a href="./interview.html">NOORとBETWEENについてのQ&amp;A →</a></p></div></div></div></section>
 
 
 <section class="series" id="series">
   <div class="shell">
-    <h2 class="big-title">7つの方法で、<br>関係を構造にする。</h2><p class="series-note">シリーズを選択すると、作品3点を表示します。</p>
+    <h2 class="big-title">BETWEEN<br>6つのシリーズ。</h2><p class="series-note">6シリーズ・各3作品。掲載画像は旧サイトの作品資料を引き継いでいます。</p>
 
     <div class="series-grid">
 
@@ -585,26 +545,11 @@ footer .shell{
         </div>
         <h3>Circuit</h3>
         <div class="jp">回路</div>
-        <p class="desc">電子部品・回路が持つ実在の物理特性を原作として、人の関係性へ変換する。抵抗の摩擦、コンデンサの蓄積、トランジスタの増幅が、そのまま関係の構造になる。</p>
+        <p class="desc">電子部品の性質や回路の接続を手がかりに、想いの方向、蓄積、影響の伝わり方を描く。人と人のあいだにある、届くことと届かないことを見つめる。</p>
         <div class="formula">V = IR</div>
       </article>
 
-      <article class="series-card series-link" tabindex="0" role="button" aria-label="Quantum の作品を3点見る" data-series="quantum">
-        <div class="series-icon" aria-hidden="true">
-          <svg viewBox="0 0 64 64">
-            <circle cx="25" cy="32" r="14"/>
-            <circle cx="39" cy="32" r="14"/>
-            <path d="M25 20v24M39 20v24"/>
-            <path d="M22 26h6M36 26h6M22 38h6M36 38h6"/>
-          </svg>
-        </div>
-        <h3>Quantum</h3>
-        <div class="jp">量子</div>
-        <p class="desc">量子もつれ、量子トンネル効果など、実在する量子現象が持つ関係構造だけを抽出し、抽象作品へ翻訳する。</p>
-        <div class="formula">|ψ〉 = α|00〉 + β|11〉</div>
-      </article>
-
-      <article class="series-card series-link" tabindex="0" role="button" aria-label="Field の作品を3点見る" data-series="field">
+      <article class="series-card series-link" tabindex="0" role="button" aria-label="Gravity の作品を3点見る" data-series="field">
         <div class="series-icon" aria-hidden="true">
           <svg viewBox="0 0 64 64">
             <ellipse cx="32" cy="32" rx="24" ry="14"/>
@@ -612,9 +557,9 @@ footer .shell{
             <path d="M12 32c6-8 12-10 20-10s14 2 20 10"/>
           </svg>
         </div>
-        <h3>Field</h3>
-        <div class="jp">場</div>
-        <p class="desc">天体力学の数理構造を、粒子の位置・密度・大きさ・濃度へ変換する。点の位置は重心やラグランジュ点の数式が決める。</p>
+        <h3>Gravity</h3>
+        <div class="jp">重力</div>
+        <p class="desc">重心、ロシュ限界、ラグランジュ点。引き合う力や均衡を手がかりに、互いの存在が距離と形を変える関係を描く。</p>
         <div class="formula">Barycenter / Lagrange Point</div>
       </article>
 
@@ -626,7 +571,7 @@ footer .shell{
         </div>
         <h3>Flow</h3>
         <div class="jp">流動</div>
-        <p class="desc">連立微分方程式・ベクトル場を原作に、多数の初期点の軌跡から吸引・分岐・境界を可視化する。</p>
+        <p class="desc">流れや軌跡を手がかりに、近づくこと、分かれること、異なる方向へ進むことを描く。変化の途中にある関係を捉える。</p>
         <div class="formula">dx/dt = f(x, y)</div>
       </article>
 
@@ -642,7 +587,7 @@ footer .shell{
         </div>
         <h3>Structure</h3>
         <div class="jp">構造</div>
-        <p class="desc">物語や人間関係に内在する主体、状態、判断、分岐、断絶、結果を構造図として設計し、抽象作品へ変換する。</p>
+        <p class="desc">物語や人間関係にある接続、分岐、断絶、因果を抽出する。出来事の奥にある構造を、線と面、配置へと翻訳する。</p>
         <div class="formula">state → transition → result</div>
       </article>
 
@@ -655,24 +600,24 @@ footer .shell{
         </div>
         <h3>Morphology</h3>
         <div class="jp">形態</div>
-        <p class="desc">関係を記述する数式・数理モデルから幾何学構造を導き、その構造を無色透明ガラスとして物質化する。</p>
+        <p class="desc">関係を記述する数理モデルから形態を探る。近接や重なり、連なりによって生まれる形を通じて、関係そのものを捉え直す。</p>
         <div class="formula">f(x,y) → geometry → glass</div>
       </article>
 
-      <article class="series-card series-link" tabindex="0" role="button" aria-label="Dimension の作品を3点見る" data-series="dimension">
+      <article class="series-card series-link" tabindex="0" role="button" aria-label="Perspective の作品を3点見る" data-series="dimension">
         <div class="series-icon" aria-hidden="true">
           <svg viewBox="0 0 64 64">
             <path d="M32 8l18 12v24L32 56 14 44V20z"/>
             <path d="M32 8v48M14 20l18 12 18-12M32 32l18 12"/>
           </svg>
         </div>
-        <h3>Dimension</h3>
-        <div class="jp">次元</div>
-        <p class="desc">数式から共有境界・頂点・面を生成し、計算結果に忠実なキュビズム構造として作品化する。</p>
+        <h3>Perspective</h3>
+        <div class="jp">視点</div>
+        <p class="desc">見る位置や捉え方が変わると、同じ関係にも異なる形が現れる。複数の視点から、ひとつに定まらない関係の姿を描く。</p>
         <div class="formula">eq → vertices → faces</div>
       </article>
 
-      <div class="series-card empty" aria-hidden="true"></div>
+      
 
     </div>
   </div>
@@ -699,15 +644,15 @@ footer .shell{
     <div class="works-top"><button type="button" class="works-close" id="works-close" aria-label="閉じる">× <span>閉じる</span></button></div>
     <div class="works-intro"><h2 id="works-title"></h2><p id="works-subtitle"></p></div>
     <div class="works-grid" id="works-grid"></div>
-    <p class="works-help">画像の登録：GitHub の images フォルダに <code>images/シリーズ名-01.png</code> 〜 <code>03.png</code> のファイルを同じフォルダに配置してください。ここで画像を選ぶと、このブラウザ上で仮プレビューできます（保存・アップロードはされません）。</p>
+    <p class="works-help">旧サイト掲載画像。現在の展示作品とは異なる場合があります。</p>
   </section>
 </div>
 
 
 <footer>
   <div class="shell">
-    <span>© NOOR / N.LAB</span>
-    <a href="./interview.html" aria-label="NOOR インタビューを読む">インタビュー →</a>
+    <span>© NOOR / N.LAB<br><small>NOOR — AI Graphic Artist</small></span>
+    <a href="./interview.html" aria-label="NOOR インタビューを読む">Q&A →</a>
     
   </div>
 </footer>
@@ -716,8 +661,8 @@ footer .shell{
 <script>
 (function(){
   const names = {
-    circuit:['Circuit','回路'],quantum:['Quantum','量子'],field:['Field','場'],
-    flow:['Flow','流動'],structure:['Structure','構造'],morphology:['Morphology','形態'],dimension:['Dimension','次元']
+    circuit:['Circuit','回路'],field:['Gravity','重力'],
+    flow:['Flow','流動'],structure:['Structure','構造'],morphology:['Morphology','形態'],dimension:['Perspective','視点']
   };
   const modal=document.getElementById('works-modal');
   const dialog=modal.querySelector('.works-dialog');
@@ -741,7 +686,7 @@ footer .shell{
       image.onerror=()=>{
         if(!image.dataset.fallback){
           image.dataset.fallback='1';
-          image.src='https://raw.githubusercontent.com/naruhito22-collab/noor-art/main/images/'+key+'-'+num+'.png';
+          image.src='https://raw.githubusercontent.com/naruhito22-collab/noor-art/main/v3/images/'+key+'-'+num+'.png';
         }else{
           frame.classList.remove('has-image');
           placeholder.querySelector('.p').textContent='画像を読み込めませんでした';
@@ -754,14 +699,7 @@ footer .shell{
       frame.append(placeholder);
       const bottom=document.createElement('div');bottom.className='work-bottom';
       const label=document.createElement('strong');label.textContent=english+' '+num;
-      const upload=document.createElement('label');upload.className='work-upload';upload.textContent='画像を選ぶ';
-      const input=document.createElement('input');input.type='file';input.accept='image/*';
-      input.setAttribute('aria-label', english+' 作品'+num+' の画像を選択');
-      input.addEventListener('change',()=>{
-        const file=input.files && input.files[0];if(!file) return;
-        const url=URL.createObjectURL(file);localURLs.push(url);image.src=url;
-      });
-      upload.append(input);bottom.append(label,upload);item.append(frame,bottom);grid.append(item);
+      bottom.append(label);item.append(frame,bottom);grid.append(item);
     }
     modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('works-open');
     dialog.focus();if(pushHash)history.pushState(null,'','#works-'+key);
