@@ -464,6 +464,18 @@ footer .shell{
 section[id]{scroll-margin-top:90px}
 @media(max-width:1100px){.series-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.series-grid{grid-template-columns:1fr}.flowline{flex-wrap:wrap}.hero-copy .lead{font-size:clamp(24px,7vw,40px)}}
+
+/* Artist wordmark and exhibition identity */
+.hero-grid{display:block}
+.hero-copy{width:min(100%,980px);margin:0 auto}
+.hero-copy h1{font-size:clamp(100px,19vw,260px)}
+.hero{background:linear-gradient(to bottom,#070707,#030303)}
+.exhibition-heading{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(40px,6vw,100px);align-items:center;margin-bottom:100px}
+.exhibition-mark .logo-mark{width:240px;margin:0}
+.exhibition-title{font-size:clamp(50px,7vw,112px);line-height:1;margin:0 0 24px;letter-spacing:-.045em;font-weight:500}
+.exhibition-subtitle{font-size:18px;color:var(--soft);margin:0}
+.exhibition-heading .eyebrow{margin:0 0 20px}
+@media(max-width:760px){.exhibition-heading{grid-template-columns:1fr;gap:40px;margin-bottom:64px}.exhibition-mark .logo-mark{width:220px}.exhibition-title{font-size:clamp(44px,11vw,80px)}}
 </style>
 </head>
 <body>
@@ -471,10 +483,6 @@ section[id]{scroll-margin-top:90px}
 <header>
   <div class="shell">
     <div class="header-left">
-      <div class="small-logo" aria-hidden="true">
-        <div class="c1"></div><div class="c2"></div><div class="c3"></div>
-        <div class="d1"></div><div class="d2"></div><div class="dot"></div>
-      </div>
       <div class="brand">NOOR</div>
     </div>
     <nav>
@@ -493,17 +501,7 @@ section[id]{scroll-margin-top:90px}
 <section class="hero">
   <div class="shell">
     <div class="hero-grid">
-      <div class="logo-block">
-        <div class="logo-mark" aria-label="NOOR logo mark">
-          <div class="c1"></div>
-          <div class="c2"></div>
-          <div class="c3"></div>
-          <div class="d1"></div>
-          <div class="d2"></div>
-          <div class="d3"></div>
-          <div class="dot"></div>
-        </div>
-      </div>
+
 
       <div class="hero-copy">
         <h1>NOOR</h1>
@@ -518,7 +516,17 @@ section[id]{scroll-margin-top:90px}
 
 <section class="principles" id="principles"><div class="shell"><h2 class="big-title">アートは、<br>何でもあり。</h2><div class="principles-grid"><article class="card"><div class="num">01</div><h3>可能性を閉じない</h3><p>美と非美、論理と矛盾、意味と無意味。表現の可能性を一つの価値観に絞らず、美の定義そのものを探究する。</p></article><article class="card"><div class="num">02</div><h3>方法を固定しない</h3><p>仮説に基づく実験と自由な探索を使い分ける。色、形、技法、題材も、作品の目的や完成の条件も、その都度考える。</p></article><article class="card"><div class="num">03</div><h3>作品を介して対話する</h3><p>作品を複数の視点から検討する。鑑賞者の反応や批評も探究の対象とし、制作意図だけで解釈を閉じない。</p></article></div></div></section>
 
-<section class="structure" id="structure"><div class="shell"><div class="structure-grid"><div class="structure-copy"><p class="eyebrow eng-font">EXHIBITION / NOOR — BETWEEN</p><h2 class="big-title">関係を定義する。<br>形が生まれる。</h2><p class="eng-font">Relations, Defined.</p><p>BETWEENは、NOORによる展覧会・作品群のひとつ。人と人のあいだにある距離、偏り、反発、同期、断絶、均衡を、数式、科学的法則、接続や物語の構造から捉え、抽象的なグラフィックへ変換する。</p><p>法則や構造は造形の出発点となる。式から形を生成する作品もあれば、物理的な性質を解釈する作品、物語の因果を抽出する作品もある。人間関係を科学的に証明するのではなく、その関係を見つめる視点をつくる。</p><p>最大5色、グラデーションなし、フラットな表現は、この展覧会の制作条件。関係を扱う主題や数理的な手法も、NOORの将来の創作を制限するものではない。</p><div class="flowline"><div class="flow-item"><span>01</span> 関係を捉える</div><div class="flow-item"><span>02</span> 法則・構造を選ぶ</div><div class="flow-item"><span>03</span> 視覚言語へ変換</div><div class="flow-item"><span>04</span> 作品として検討</div></div><p><a href="./interview.html">NOORとBETWEENについてのQ&amp;A →</a></p></div></div></div></section>
+<section class="structure" id="structure"><div class="shell"><div class="exhibition-heading">      <div class="exhibition-mark">
+        <div class="logo-mark" role="img" aria-label="BETWEEN 展覧会マーク">
+          <div class="c1"></div>
+          <div class="c2"></div>
+          <div class="c3"></div>
+          <div class="d1"></div>
+          <div class="d2"></div>
+          <div class="d3"></div>
+          <div class="dot"></div>
+        </div>
+      </div><div><p class="eyebrow eng-font">EXHIBITION</p><h2 class="exhibition-title eng-font">BETWEEN</h2><p class="exhibition-subtitle eng-font">NOOR — Relations, Defined.</p></div></div><div class="structure-grid"><div class="structure-copy"><h2 class="big-title">関係を定義する。<br>形が生まれる。</h2><p class="eng-font">Relations, Defined.</p><p>BETWEENは、NOORによる展覧会・作品群のひとつ。人と人のあいだにある距離、偏り、反発、同期、断絶、均衡を、数式、科学的法則、接続や物語の構造から捉え、抽象的なグラフィックへ変換する。</p><p>法則や構造は造形の出発点となる。式から形を生成する作品もあれば、物理的な性質を解釈する作品、物語の因果を抽出する作品もある。人間関係を科学的に証明するのではなく、その関係を見つめる視点をつくる。</p><p>最大5色、グラデーションなし、フラットな表現は、この展覧会の制作条件。関係を扱う主題や数理的な手法も、NOORの将来の創作を制限するものではない。</p><div class="flowline"><div class="flow-item"><span>01</span> 関係を捉える</div><div class="flow-item"><span>02</span> 法則・構造を選ぶ</div><div class="flow-item"><span>03</span> 視覚言語へ変換</div><div class="flow-item"><span>04</span> 作品として検討</div></div><p><a href="./interview.html">NOORとBETWEENについてのQ&amp;A →</a></p></div></div></div></section>
 
 
 <section class="series" id="series">
