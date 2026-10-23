@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Provena | 登録記録の照合</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head>
+<body><header><a href="./">PROVENA</a><span>ART REGISTRY</span></header><main>
+<p class="eyebrow">REGISTRATION RECORD</p><h1>登録記録の照合</h1>
+<p id="message" role="status">記録を読み込んでいます。</p><p id="test" hidden>TEST / 試験用の登録記録です。正式な作品証明ではありません。</p>
+<section id="record" hidden><div class="art"><img id="image" alt="登録作品のプレビュー"></div><div class="details"><h2 id="title"></h2><p id="artist"></p><dl id="fields"></dl><p id="state"></p></div></section>
+<form id="lookup"><label for="certificate">証明書ID</label><div><input id="certificate" name="id" required maxlength="80" autocomplete="off"><button>照合する</button></div></form>
+<aside>このページは登録記録を照合するものです。作品の真正性・作者帰属・著作権・所有権・市場価値を保証しません。QRコードは複製可能であり、QRや証明書の所持だけで所有権は証明されません。</aside>
+<p class="foot" id="exported"></p><p class="foot">古い表示を避けるため、オンラインで最新の発行状態を確認してください。</p></main></body></html>
